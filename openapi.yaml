@@ -180,11 +180,8 @@ components:
           type: string
         isbn:
           type: string
-
-        shelfId:
-          type: integer
-          format: int64
-
+        shelf:
+          $ref: '#/components/schemas/Shelf'
     Shelf:
       type: object
       properties:
@@ -193,7 +190,3 @@ components:
           format: int64
         name:
           type: string
-        books:
-          type: array
-          items:
-            $ref: '#/components/schemas/Book'

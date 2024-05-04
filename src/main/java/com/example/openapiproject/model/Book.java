@@ -11,6 +11,9 @@ public class Book {
     private String title;
     private String author;
     private String isbn;
+    @ManyToOne
+    @JoinColumn(name = "shelf_id")
+    private Shelf shelf;
 
     public Book(Long id, String title, String author, String isbn) {
         this.id = id;
@@ -38,6 +41,10 @@ public class Book {
         return isbn;
     }
 
+    public Shelf getShelf() {
+        return shelf;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -52,5 +59,8 @@ public class Book {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+    public void setShelf(Shelf shelf) {
+        this.shelf = shelf;
     }
 }
