@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Book API
-  description: Simple API to manage books using CRUD operations
+  description: Simple API to manage books and shelves using CRUD operations
   version: 4.0.0
 servers:
   - url: http://localhost:8080/api
@@ -86,6 +86,86 @@ paths:
       responses:
         '204':
           description: Book deleted
+  /shelves/:
+    get:
+      tags:
+        - Shelves
+      summary: List all shelves
+      responses:
+        '200':
+          description: A list of shelves
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Shelf'
+    post:
+      tags:
+        - Shelves
+      summary: Create a new shelf
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Shelf'
+      responses:
+        '201':
+          description: Shelf created
+  /shelves/{id}:
+    get:
+      tags:
+        - Shelves
+      summary: Get a shelf by its ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: A shelf object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shelf'
+    put:
+      tags:
+        - Shelves
+      summary: Update a shelf by its ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Shelf'
+      responses:
+        '200':
+          description: Updated shelf
+    delete:
+      tags:
+        - Shelves
+      summary: Delete a shelf by its ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Shelf deleted
 components:
   schemas:
     Book:
@@ -101,3 +181,19 @@ components:
         isbn:
           type: string
 
+        shelfId:
+          type: integer
+          format: int64
+
+    Shelf:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        books:
+          type: array
+          items:
+            $ref: '#/components/schemas/Book'
