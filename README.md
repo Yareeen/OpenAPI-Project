@@ -25,7 +25,7 @@ The OpenAPI Project is a simple, powerful REST API for managing books and shelve
    ```
 3. **Pull the Docker image**
    ```
- docker pull yarenn/openapiproject:latest
+   docker pull yarenn/openapiproject:latest
    ```
 
 4. **Build the project**
